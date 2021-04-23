@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "iTrellisTripCalc", "iTrellisTripCalc.csproj", "{8A964CE0-979A-4FD4-9A8F-A64722C03DCA}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8A964CE0-979A-4FD4-9A8F-A64722C03DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8A964CE0-979A-4FD4-9A8F-A64722C03DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8A964CE0-979A-4FD4-9A8F-A64722C03DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8A964CE0-979A-4FD4-9A8F-A64722C03DCA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {8F09DE7E-C8C1-438A-9A80-1B2B0E23D80A}
+	EndGlobalSection
+EndGlobal
