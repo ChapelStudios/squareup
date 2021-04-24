@@ -84,18 +84,14 @@ export const getTestData = (jest) => ({
     testTitle3,
     testTitle4,
     testTitle5,
-    fauxAddExpense: jest.fn(),
-    fauxRemoveExpense: jest.fn(),
-    fauxAddPerson: jest.fn(),
-    fauxRemovePerson: jest.fn(),
     testingState: {
         value: {
             people: testPeople,
             expenses: testExpenses,
-            addPerson: this.fauxAddPerson,
-            removePerson: this.fauxRemovePerson,
-            addExpense: this.fauxAddExpense,
-            removeExpense: this.fauxRemoveExpense,
+            addPerson: jest.fn(),
+            removePerson: jest.fn(),
+            addExpense: jest.fn(),
+            removeExpense: jest.fn(),
         }
     },
 });

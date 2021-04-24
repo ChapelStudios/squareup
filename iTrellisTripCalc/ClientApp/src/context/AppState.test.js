@@ -2,12 +2,11 @@
 
 import { fireEvent, screen } from '@testing-library/react';
 import AppContext from './AppContext';
-import { renderWithContextProps, renderWithInitialState, getTestData } from '../testUtils/utils';
+import { renderWithInitialState, getTestData } from '../testUtils/utils';
 import '@testing-library/jest-dom/extend-expect';
 
 
 describe("trip calc state", () => {
-    const testName = 'Testor McTestington';
     const { testName, testTitle1, amount1 } = getTestData(jest);
     const fakeExpense = {
         title: testTitle1,

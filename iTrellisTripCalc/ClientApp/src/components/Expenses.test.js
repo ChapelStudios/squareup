@@ -2,21 +2,21 @@
 import Expenses from './Expenses';
 
 import { fireEvent, screen } from '@testing-library/react'
-import { renderWithContextProps, renderWithInitialState, getTestData } from '../testUtils/utils';
+import { renderWithContextProps, renderWithInitialState, getTestData, testPeople, testExpenses } from '../testUtils/utils';
 import '@testing-library/jest-dom/extend-expect';
 
 describe('Expenses Testing', () => {
     const {
-        testPeople,
         testName,
         testName2,
         amount1,
         amount2,
         testTitle1,
         testTitle2,
-        fauxAddExpense,
         testingState,
     } = getTestData(jest);
+
+    const fauxAddExpense = jest.fn();
 
     const initWithPeopleState = {
         value: {
@@ -25,6 +25,17 @@ describe('Expenses Testing', () => {
             addExpense: fauxAddExpense,
         }
     };
+
+    const expenseCount = testExpenses.length;
+    const testExpense1 = testExpenses[0];
+    const testExpense2 = testExpenses[4];
+
+    const smallTestingState = {
+        value: {
+            ...testingState.value,
+            expenses: [testExpense1, testExpense2],
+        }
+    }
 
     const renderInitState = () => renderWithInitialState(<Expenses />);
     const renderWithProps = (props) => renderWithContextProps(<Expenses />, props);
@@ -39,30 +50,30 @@ describe('Expenses Testing', () => {
     it("has <tablerow> for each expense", () => {
         renderWithProps(testingState);
         const tableRows = screen.getAllByRole('row');
-        expect(tableRows).toHaveLength(3); // 2 for items + 1 for header
+        expect(tableRows).toHaveLength(expenseCount + 1); // +1 for header
     });
 
     it('has a delete button for each expense', () => {
         renderWithProps(testingState);
-        expect(screen.getAllByTitle('Delete')).toHaveLength(2)
+        expect(screen.getAllByTitle('Delete')).toHaveLength(expenseCount)
     });
 
     it("Displays payers' names", () => {
-        renderWithProps(testingState);
-        expect(screen.getByText(testName)).toBeInTheDocument();
-        expect(screen.getByText(testName2)).toBeInTheDocument();
+        renderWithProps(smallTestingState);
+        expect(screen.getByText(testExpense1.payer)).toBeInTheDocument();
+        expect(screen.getByText(testExpense2.payer)).toBeInTheDocument();
     });
 
     it("Displays expenses' amounts", () => {
-        renderWithProps(testingState);
-        expect(screen.getByText(amount1.toString())).toBeInTheDocument();
-        expect(screen.getByText(amount2.toString())).toBeInTheDocument();
+        renderWithProps(smallTestingState);
+        expect(screen.getByText(testExpense1.amount.toString())).toBeInTheDocument();
+        expect(screen.getByText(testExpense2.amount.toString())).toBeInTheDocument();
     });
 
     it("Displays expenses' titles", () => {
-        renderWithProps(testingState);
-        expect(screen.getByText(testTitle1)).toBeInTheDocument();
-        expect(screen.getByText(testTitle2)).toBeInTheDocument();
+        renderWithProps(smallTestingState);
+        expect(screen.getByText(testExpense1.title)).toBeInTheDocument();
+        expect(screen.getByText(testExpense2.title)).toBeInTheDocument();
     });
 
     it("has a Title field", () => {
@@ -126,7 +137,7 @@ describe('Expenses Testing', () => {
 
         fireEvent.click(screen.getByRole('button', { name: 'Add' }));
 
-        expect(fauxAdd).toHaveBeenCalledWith({
+        expect(fauxAddExpense).toHaveBeenCalledWith({
             payer: testName,
             title: testTitle1,
             amount: amount2
@@ -143,7 +154,7 @@ describe('Expenses Testing', () => {
 
         fireEvent.click(screen.getByRole('button', { name: 'Add' }));
 
-        expect(fauxAdd).not.toHaveBeenCalled();
+        expect(fauxAddExpense).not.toHaveBeenCalled();
     });
 
     it('ignores add clicks if amount is zero', () => {
@@ -156,7 +167,7 @@ describe('Expenses Testing', () => {
 
         fireEvent.click(screen.getByRole('button', { name: 'Add' }));
 
-        expect(fauxAdd).not.toHaveBeenCalled();
+        expect(fauxAddExpense).not.toHaveBeenCalled();
     });
 
     it('ignores add clicks if payor is not chosen', () => {
@@ -168,7 +179,7 @@ describe('Expenses Testing', () => {
 
         fireEvent.click(screen.getByRole('button', { name: 'Add' }));
 
-        expect(fauxAdd).not.toHaveBeenCalled();
+        expect(fauxAddExpense).not.toHaveBeenCalled();
     });
 
     it('clears title field after adding a new person', () => {

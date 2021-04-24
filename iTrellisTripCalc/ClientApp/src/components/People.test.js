@@ -7,7 +7,10 @@ import '@testing-library/jest-dom/extend-expect';
 
 
 describe("People Testing", () => {
-    const { testName, testName2, fauxAddPerson } = getTestData(jest);
+    const { testName, testName2 } = getTestData(jest);
+
+    const fauxAddPerson = jest.fn();
+
     const testingState = {
         value: {
             people: [{
@@ -61,12 +64,12 @@ describe("People Testing", () => {
         const testState = {
             value: {
                 people: [],
-                addPerson: fauxAdd,
+                addPerson: fauxAddPerson,
             }
         };
         renderWithProps(testState);
         fireEvent.click(screen.getByRole('button', { name: 'Add' }));
-        expect(fauxAdd).not.toHaveBeenCalled();
+        expect(fauxAddPerson).not.toHaveBeenCalled();
     });
 
     it('has an add person button', () => {
