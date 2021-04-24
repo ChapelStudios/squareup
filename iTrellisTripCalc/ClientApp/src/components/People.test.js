@@ -13,11 +13,13 @@ describe("People Testing", () => {
 
     const testingState = {
         value: {
-            people: [{
-                name: testName
-            }, {
-                name: testName2
-            }],
+            people: [
+                {
+                    name: testName
+                }, {
+                    name: testName2
+                }
+            ],
             addPerson: fauxAddPerson,
         }
     };
