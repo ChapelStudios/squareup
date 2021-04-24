@@ -6,10 +6,10 @@ import { testPeople, testExpenses } from '../testUtils/utils';
 const AppState = ({ children }) => {
     const initialState = {
         people: [
-            ...testPeople,
+            //...testPeople,
         ],
         expenses: [
-            ...testExpenses,
+            //...testExpenses,
         ]
     };
 
