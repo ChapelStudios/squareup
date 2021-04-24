@@ -9,6 +9,11 @@ import '@testing-library/jest-dom/extend-expect';
 describe("trip calc state", () => {
     const testName = 'Testor McTestington';
     const { testName, testTitle1, amount1 } = getTestData(jest);
+    const fakeExpense = {
+        title: testTitle1,
+        payer: testName,
+        amount: amount1,
+    };
 
     const PeopleTestComponent = () => {
         const { people, removePerson, addPerson } = useContext(AppContext);
@@ -25,11 +30,8 @@ describe("trip calc state", () => {
             }}>Remove</button>
         </Fragment>);
     }
-    const fakeExpense = {
-        title: testTitle1,
-        payer: testName,
-        amount: amount1,
-    };
+
+
     const ExpenseTestComponent = () => {
         const { expenses, removeExpense, addExpense } = useContext(AppContext);
 
