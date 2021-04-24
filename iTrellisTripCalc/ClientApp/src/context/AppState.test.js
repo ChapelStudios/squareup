@@ -2,12 +2,14 @@
 
 import { fireEvent, screen } from '@testing-library/react';
 import AppContext from './AppContext';
-import { renderWithContextProps, renderWithInitialState } from '../testUtils/utils';
+import { renderWithContextProps, renderWithInitialState, getTestData } from '../testUtils/utils';
 import '@testing-library/jest-dom/extend-expect';
 
 
 describe("trip calc state", () => {
     const testName = 'Testor McTestington';
+    const { testName, testTitle1, amount1 } = getTestData(jest);
+
     const PeopleTestComponent = () => {
         const { people, removePerson, addPerson } = useContext(AppContext);
 
@@ -24,8 +26,9 @@ describe("trip calc state", () => {
         </Fragment>);
     }
     const fakeExpense = {
-        name: testName,
-        amount: 15
+        title: testTitle1,
+        payer: testName,
+        amount: amount1,
     };
     const ExpenseTestComponent = () => {
         const { expenses, removeExpense, addExpense } = useContext(AppContext);
